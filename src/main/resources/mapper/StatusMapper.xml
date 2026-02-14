@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdn.project.mapper.StatusMapper">
+	
+	<select id="selectLawdList" parameterType="String" resultType="com.kdn.project.vo.LawdCodeVO">
+		SELECT  LAWD_CODE
+			   ,SIDO_NAME
+			   ,SGG_NAME
+			   ,UMD_NAME
+			   ,RI_NAME
+			   ,UPPER_LAWD_CODE
+			   ,USE_FLAG
+			   ,CREATED_AT :: TIMESTAMP AS CREATED_AT
+			   ,UPDATED_AT :: TIMESTAMP AS CREATED_AT
+		  FROM TB_LAWD_CODE
+		 WHERE UPPER_LAWD_CODE = #{upperLawdCode}
+	</select>
+	
+	<select id="selectPlantStatWeekList" parameterType="String" resultType="com.kdn.project.vo.PlantStatWeekVO">
+		SELECT  DISTINCT ON(PSW.LAWD_CODE)
+			  	PSW.PSW_ID
+			   ,PSW.LAWD_CODE
+			   ,PSW.UPPER_LAWD_CODE
+			   ,LC.SIDO_NAME
+			   ,LC.SGG_NAME
+			   ,PSW.STAT_DATE
+			   ,PSW.PLANT_CNT
+			   ,PSW.PLANT_CAP
+			   ,PSW.FUEL_PWR
+			   ,PSW.CREATED_AT :: TIMESTAMP AS CREATED_AT
+		  FROM TB_PLANT_STAT_WEEK PSW LEFT JOIN TB_LAWD_CODE LC
+		  									 ON PSW.LAWD_CODE = LC.LAWD_CODE
+		 WHERE PSW.UPPER_LAWD_CODE = #{upperLawdCode}
+	  ORDER BY PSW.LAWD_CODE, PSW.STAT_DATE DESC
+	</select>
+	
+	<select id="selectPlantStatWeekTotal" parameterType="String" resultType="com.kdn.project.vo.PlantStatWeekTotalVO">
+		SELECT  SUM(PLANT_CNT) AS TOTAL_PLANT_CNT
+			   ,SUM(PLANT_CAP) AS TOTAL_PLANT_CAP
+			   ,SUM(FUEL_PWR) AS TOTAL_FUEL_PWR
+		  FROM (
+	  			SELECT  DISTINCT ON(LAWD_CODE)
+	  			  	    PLANT_CNT
+	  			  	   ,PLANT_CAP
+	  			  	   ,FUEL_PWR
+	  			  FROM TB_PLANT_STAT_WEEK
+	  			 WHERE UPPER_LAWD_CODE = #{upperLawdCode}
+	  		  ORDER BY LAWD_CODE, STAT_DATE DESC
+		  		)
+	</select>
+	
+	<select id="selectGenStatMonthList" parameterType="int" resultType="com.kdn.project.vo.GenStatMonthVO">
+		SELECT GSM.GSM_ID
+			  ,GSM.LAWD_CODE
+			  ,LC.SIDO_NAME
+			  ,GSM.YEAR
+			  ,GSM.MONTH
+			  ,GSM.FUEL_PWR
+			  ,GSM.CREATED_AT :: TIMESTAMP AS CREATED_AT
+		  FROM TB_GEN_STAT_MONTH GSM LEFT JOIN TB_LAWD_CODE LC
+		  									ON GSM.LAWD_CODE = LC.LAWD_CODE
+		 WHERE GSM.YEAR = #{year}
+	  ORDER BY GSM.LAWD_CODE, GSM.MONTH 
+	</select>
+	
+	<select id="selectPlantStatYearList" parameterType="int" resultType="com.kdn.project.vo.PlantStatYearVO">
+		SELECT PSY.PSY_ID
+			  ,PSY.LAWD_CODE
+			  ,LC.SIDO_NAME
+			  ,PSY.YEAR
+			  ,PSY.PLANT_CNT
+			  ,PSY.PLANT_CAP
+			  ,PSY.CREATED_AT :: TIMESTAMP AS CREATED_AT
+		  FROM TB_PLANT_STAT_YEAR PSY LEFT JOIN TB_LAWD_CODE LC
+		  									 ON PSY.LAWD_CODE = LC.LAWD_CODE
+		 WHERE PSY.YEAR = #{year}
+	  ORDER BY PSY.LAWD_CODE 
+	</select>
+</mapper>

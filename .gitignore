@@ -1,0 +1,13 @@
+# 특정 파일 제외
+root-context.xml
+
+# 혹은 경로를 포함해서 정확히 지정 (예시 경로)
+src/main/webapp/WEB-INF/spring/root-context.xml
+
+# 그 외 깃에 올리면 안 되는 것들 (권장)
+.settings/
+.classpath
+.project
+bin/
+target/
+.DS_Store
