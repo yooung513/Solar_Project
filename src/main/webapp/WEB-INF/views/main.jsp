@@ -12,6 +12,7 @@
 	<title>KDN 태양광 발전</title>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/chart.umd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/index.umd.min.js"></script>
 </head>
 
 <style>
@@ -322,9 +323,20 @@
 		<main>
 			<div class="container">
 				<div class="mapContainer">
-					<div class="mapWrapper">	</div>
-					
-					<div class="infoWrapper">	</div>
+					<div class="mapWrapper">
+						<canvas id="mapChart"></canvas>
+					</div>
+						
+					<div class="infoWrapper">
+						<div id="regionInfo">
+					        <h3 id="regionName">전국</h3>
+					        <div id="regionStats">
+					            <p>발전소 개수: <span id="plantCnt">-</span>개</p>
+					            <p>발전 용량: <span id="plantCap">-</span>kW</p>
+					            <p>발전량: <span id="genPwr">-</span>MWh</p>
+					        </div>
+					    </div>
+					</div>
 				</div>
 				
 				<div class="detailContainer">
@@ -366,6 +378,14 @@
 	
 	<script>
 		var currentChartType = 'gen'; // 초기 차트 타입
+		// 코드 매핑
+		const CODE_TO_SIDO = {
+			"11": "서울", "26": "부산", "27": "대구", "28": "인천",
+			"29": "광주", "30": "대전", "31": "울산", "36": "세종",
+			"41": "경기", "42": "강원", "43": "충북", "44": "충남",
+			"45": "전북", "46": "전남", "47": "경북", "48": "경남",
+			"50": "제주"
+		};
 		
 		// 발전량 월간 현황 데이터
 		const genStatMonthData = [
@@ -435,6 +455,21 @@
 			return colors[index % colors.length];
 		}
 	
+		// 지도 차트 초기화
+		function initMap() {
+			$.getJSON('${pageContext.request.contextPath}/resources/geojson/korea.geojson', function(geoJson) {
+				createMapChart(geoJson);
+			}).fail(function() {
+				console.error('GeoJSON 파일을 불러올 수 없습니다.');
+				alert('지도 데이터를 불러오는데 실패했습니다.');
+			});
+		}
+		
+		// 지도 차트 생성
+		function createMapChart(geoJson) {
+			const ctx = document.getElementById('mapChart');
+		}
+		
 		// 발전량 차트 데이터 생성
 		function createGenChartData(dataBySido) {
 			return {
