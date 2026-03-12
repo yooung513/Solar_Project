@@ -16,6 +16,23 @@
 			   ,UPDATED_AT :: TIMESTAMP AS CREATED_AT
 		  FROM TB_LAWD_CODE
 		 WHERE UPPER_LAWD_CODE = #{upperLawdCode}
+		   AND USE_FLAG = 'Y'
+	</select>
+	
+	<select id="selectDistrictGeoJson" parameterType="String" resultType="com.kdn.project.vo.LawdCodeVO">
+		SELECT  LAWD_CODE
+			   ,SIDO_NAME
+			   ,SGG_NAME
+			   ,UMD_NAME
+			   ,RI_NAME
+			   ,UPPER_LAWD_CODE
+			   ,USE_FLAG
+			   ,ST_AsGeoJSON(GEOM) AS GEO_JSON
+			   ,CREATED_AT :: TIMESTAMP AS CREATED_AT
+			   ,UPDATED_AT :: TIMESTAMP AS CREATED_AT
+		  FROM TB_LAWD_CODE
+		 WHERE UPPER_LAWD_CODE = #{upperLawdCode}
+		   AND USE_FLAG = 'Y'
 	</select>
 	
 	<select id="selectPlantStatWeekList" parameterType="String" resultType="com.kdn.project.vo.PlantStatWeekVO">

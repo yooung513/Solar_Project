@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+	/* 전기안전체 */
+	@font-face {	
+		font-family: 'Electrical-Safety-Regular';	
+		src: url('/resources/fonts/Electrical-Safety-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-display: swap;
+	}
+	
+	@font-face {	
+		font-family: 'Electrical-Safety-Bold';	
+		src: url('/resources/fonts/Electrical-Safety-Bold.woff') format('woff');
+	    font-weight: normal;
+	    font-display: swap;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+	.headerContainer {
+		height: 80px;
+		margin: 0 200px;
+		padding: 10px 20px 0px 10px;
+		position: relative;
+	}
+	
+	.navbar {
+		height: 100%;
+		position: relative;
+		display: flex;
+		align-items: flex-start;
+	}
+	
+	.logo {
+		height: 50px; 
+		width: auto;
+		margin: 10px 50px 0px 0px;
+	}
+	
+	.nav-menu {
+		display: flex;
+		list-style: none;
+		align-items: flex-end;
+		gap: 60px;
+		position: absolute;
+		bottom: 10px;
+		left: 320px;
+	}
+	
+	.nav-menu li {
+		position: relative;
+	    display: flex;
+	    align-items: flex-end;
+	    justify-content: center;
+	}
+	
+	.nav-menu li + li::before {
+	    content: "|";
+	    position: absolute;
+	    left: -30px;
+	    transform: translateX(-50%);
+	    
+	    font-family: 'Electrical-Safety-Regular';
+	    font-size: 30px;
+	    color: #333;
+	    line-height: 1;
+	}
+		
+	.nav-menu a {
+		font-family: 'Electrical-Safety-Regular';	
+		text-decoration: none;
+		color: #333;
+		font-size: 32px;
+		transition: color 0.3s;
+		line-height: 1;
+	}
+	
+	.nav-menu a:hover {
+		color: #ff5f00;
+	}
+	
+	.nav-menu a.active {
+		font-family: 'Electrical-Safety-Bold';
+		font-size: 36px;
+		color: #ff5f00;
+	}

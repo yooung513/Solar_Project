@@ -1,0 +1,225 @@
+@charset "UTF-8";
+
+	/* pretendard */
+	@font-face {	
+		font-family: 'PretendardGOV-Regular';	
+		src: url('/resources/fonts/PretendardGOV-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-display: swap;
+	}
+	
+	@font-face {	
+		font-family: 'PretendardGOV-Bold';	
+		src: url('/resources/fonts/PretendardGOV-Bold.woff') format('woff');
+	    font-weight: normal;
+	    font-display: swap;
+	}
+	
+	@font-face {	
+		font-family: 'PretendardGOV-SemiBold';	
+		src: url('/resources/fonts/PretendardGOV-SemiBold.woff') format('woff');
+	    font-weight: normal;
+	    font-display: swap;
+	}
+	
+	@font-face {	
+		font-family: 'PretendardGOV-ExtraBold';	
+		src: url('/resources/fonts/PretendardGOV-ExtraBold.woff') format('woff');
+	    font-weight: normal;
+	    font-display: swap;
+	}
+	
+	.container {
+		margin: 0 200px;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+	.colored-box {
+		width: 1900px;
+		height: 50px;
+		background-color: #95c0fe;
+	}
+	
+	.infoPanel {
+		width: 500px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	
+	.infoHeader {
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		padding: 25px 30px;
+		text-align: center;
+	}
+	
+	.infoBoxHeader {
+		font-family: 'PretendardGOV-ExtraBold';
+		font-size: 32px;
+		color: #333333;
+		margin: 0 0 15px 0;
+	}
+	
+	.weekDate {
+		font-family: 'PretendardGOV-SemiBold';
+		font-size: 20px;
+		color: #ff5f00;
+		margin: 0;
+	}
+	
+	.regionInfo, .districtInfo {
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		padding: 30px;
+		height: 400px;
+		
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	
+	.regionInfo h2, .districtInfo h2 {
+		font-family: 'PretendardGOV-ExtraBold';
+		font-size: 36px;
+		color: #ff5f00;
+		margin: 0 0 20px 0;
+		padding-bottom: 15px;
+		border-bottom: 3px solid #ff5f00;
+		text-align: center;
+	}
+	
+	.stat-container {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	
+	#statRow {
+		font-family: 'PretendardGOV-SemiBold';
+		font-size: 20px;  
+		margin: 15px 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		color: #333333;
+	}
+	
+	.value-group {
+	    display: flex;
+	    align-items: baseline;
+	    gap: 10px;
+	}
+	
+	#statRow .label {
+		font-family: 'PretendardGOV-SemiBold';
+		font-size: 30px;
+		color: #333333;
+	}
+	
+	#statRow .value {
+		font-family: 'PretendardGOV-ExtraBold';
+		font-size: 34px;
+		color: #ff5f00;
+		min-width: 80px;
+		text-align: right;
+	}
+	
+	.mapContainer {
+		width: 1900px;
+		height: 1050px;
+		background-color: rgba(149, 192, 254, 0.3);
+		position: relative;
+		display: flex;
+		margin: 50px 0px;
+		padding: 50px;
+		box-sizing: border-box;
+		border-radius: 50px;
+	} 
+		
+	.backBtn {
+		padding: 12px 24px;
+		font-family: 'PretendardGOV-SemiBold';
+		font-size: 20px;
+		background-color: #ff5f00;
+		color: #ffffff;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		display: none;  /*초기에는 숨김 */
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+		
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		z-index: 100;
+	}
+	
+	.backBtn:hover {
+		background-color: #e65600;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	}
+	
+	.backBtn:active {
+		transform: translateY(0);
+	}
+	
+	.mapWrapper {
+		flex: 1;
+		position: relative;
+		width: 1150px;
+		height: 950px;
+		margin-left: 50px;
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+	}
+	
+	#mapChart {
+		width: 100% !important;
+		height: 100% !important;
+		transition: transform 0.3s ease;
+	}
+	
+	.mapLoading {
+	    display: none;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    z-index: 200;
+	    flex-direction: column;
+	    align-items: center;
+	    gap: 15px;
+	}
+	
+	.mapLoading.active {
+	    display: flex;
+	}
+	
+	.spinner {
+	    width: 60px;
+	    height: 60px;
+	    border: 6px solid rgba(13, 110, 253, 0.2);
+	    border-top-color: rgba(13, 110, 253, 1.0);
+	    border-radius: 50%;
+	    animation: spin 0.8s linear infinite;
+	}
+	
+	.spinnerText {
+	    font-family: 'PretendardGOV-SemiBold';
+	    font-size: 18px;
+	    color: #333333;
+	}
+	
+	@keyframes spin {
+	    to { transform: rotate(360deg); }
+	}

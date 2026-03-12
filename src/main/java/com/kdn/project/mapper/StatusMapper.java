@@ -12,6 +12,8 @@ public interface StatusMapper {
 
 	List<LawdCodeVO> selectLawdList(String upperLawdCode);
 	
+	List<LawdCodeVO> selectDistrictGeoJson(String upperLawdCode);
+	
 	List<PlantStatWeekVO> selectPlantStatWeekList(String upperLawdCode);
 	
 	PlantStatWeekTotalVO selectPlantStatWeekTotal(String upperLawdCode);

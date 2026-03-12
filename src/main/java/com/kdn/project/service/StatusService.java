@@ -12,9 +12,15 @@ import com.kdn.project.vo.PlantStatYearVO;
 
 public interface StatusService {
 	
-	Map<String, Object> getStatusData(StatusDTO statusDTO); 
+	Map<String, Object> getWeekStatusData(StatusDTO statusDTO);
+	
+	Map<String, Object> getAnnualStatusData(StatusDTO statusDTO); 
+	
+	Map<String, Object> getDistrictData(StatusDTO statusDTO);
 	
 	List<LawdCodeVO> selectLawdList(String upperLawdCode);
+	
+	List<LawdCodeVO> selectDistrictGeoJson(String upperLawdCode);
 	
 	List<PlantStatWeekVO> selectPlantStatWeekList(String upperLawdCode);
 	
@@ -23,4 +29,5 @@ public interface StatusService {
 	List<GenStatMonthVO> selectGenStatMonthList(int year);
 	
 	List<PlantStatYearVO> selectPlantStatYearList(int year);
+
 }

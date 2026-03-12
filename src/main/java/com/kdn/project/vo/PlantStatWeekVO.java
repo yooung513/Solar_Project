@@ -2,7 +2,7 @@ package com.kdn.project.vo;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class PlantStatWeekVO extends BaseVO {
 	private String lawdCode;
 	private String sggName;
 	
-	@JsonIgnore
+	@JsonFormat(pattern = "yyyy. MM. dd")
 	private LocalDate statDate;
 	
 	private int plantCnt;
